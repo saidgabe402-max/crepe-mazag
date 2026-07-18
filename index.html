@@ -201,13 +201,15 @@ let msg =
 "العيش: " + document.getElementById("bread").value + "%0A"+
 "الحشوات الأساسية: " + mains.join(" + ") + "%0A"+
 "الإضافات: " + extras.join(", ") + "%0A"+
-"الإجمالي: " + document.getElementById("totalPrice").innerText + "%0A"+
+"الإجمالي: " + document.getElementById("totalPrice").innerText + "%0A"+}
 "التوصيل: " + document.getElementById("delivery").value;
 
 
-window.open("https://wa.me/201034249028?text=" + msg);
-  document.querySelectorAll("input,select").forEach(el=>{
-el.addEventListener("change", calculateTotal);
+winwindow.open("https://wa.me/201034249028?text=" + msg);
+}
+
+document.querySelectorAll("input,select").forEach(el=>{
+    el.addEventListener("change", calculateTotal);
 });
 
 calculateTotal();
