@@ -154,23 +154,29 @@ font-weight:bold;
 <script>
 function sendOrder(){
 
-let extras=[];
-document.querySelectorAll('input[type=checkbox]:checked').forEach(e=>{
-extras.push(e.value);
+let mains = [];
+document.querySelectorAll('.mainFill:checked').forEach(e=>{
+mains.push(e.value);
 });
 
-let msg=
-"طلب جديد من كريب مزاج%0A%0A"+
-"الاسم: "+document.getElementById("name").value+"%0A"+
-"التليفون: "+document.getElementById("phone").value+"%0A"+
-"العنوان: "+document.getElementById("address").value+"%0A%0A"+
-"العيش: "+document.getElementById("bread").value+"%0A"+
-"الحشوات الأساسية: "+mains.join(", ")+"%0A"+
-"الإضافات: "+extras.join(", ")+"%0A"+
-"التوصيل: "+document.getElementById("delivery").value;
-
-window.open("https://wa.me/201034249028?text="+msg);
+let extras = [];
+document.querySelectorAll('input[type=checkbox]:checked').forEach(e=>{
+if(!e.classList.contains('mainFill')){
+extras.push(e.value);
 }
+});
+
+let msg =
+"طلب جديد من كريب مزاج%0A%0A"+
+"الاسم: " + document.getElementById("name").value + "%0A"+
+"التليفون: " + document.getElementById("phone").value + "%0A"+
+"العنوان: " + document.getElementById("address").value + "%0A%0A"+
+"العيش: " + document.getElementById("bread").value + "%0A"+
+"الحشوات الأساسية: " + mains.join(" + ") + "%0A"+
+"الإضافات: " + extras.join(", ") + "%0A"+
+"التوصيل: " + document.getElementById("delivery").value;
+
+window.open("https://wa.me/201034249028?text=" + msg);
 </script>
 
 </body>
