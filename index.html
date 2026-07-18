@@ -7,37 +7,164 @@
 
 <style>
 body{
-    font-family: Arial;
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:50px;
+font-family:Tahoma,sans-serif;
+background:#111;
+color:white;
+margin:0;
+padding:0;
 }
-h1{
-    color:#ff8800;
+
+header{
+background:#ff9800;
+padding:20px;
+text-align:center;
+font-size:32px;
+font-weight:bold;
 }
+
+.container{
+padding:20px;
+max-width:900px;
+margin:auto;
+}
+
+.card{
+background:#222;
+padding:15px;
+margin:15px 0;
+border-radius:15px;
+}
+
+h2{
+color:#ff9800;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:8px;
+border:none;
+}
+
 button{
-    background:#25D366;
-    color:white;
-    border:none;
-    padding:15px 25px;
-    border-radius:10px;
-    font-size:18px;
+background:#25D366;
+color:white;
+padding:15px;
+border:none;
+width:100%;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.price{
+color:#ffd54f;
+font-weight:bold;
 }
 </style>
-
 </head>
+
 <body>
 
-<h1>😋 كريب مزاج</h1>
+<header>
+🔥 كريب مزاج 🔥
+</header>
 
-<p>مزاجك يبدأ من أول قضمة</p>
+<div class="container">
 
-<p>📞 01034249028</p>
+<div class="card">
+<h2>بيانات العميل</h2>
 
-<button onclick="window.open('https://wa.me/201034249028')">
-اطلب الآن
-</button>
+<input id="name" placeholder="الاسم">
+<input id="phone" placeholder="رقم الهاتف">
+<input id="address" placeholder="العنوان">
+</div>
+
+<div class="card">
+<h2>نوع العيش</h2>
+
+<select id="bread">
+<option>عيش عادي - 10ج</option>
+<option>عيش سبايسي - 10ج</option>
+</select>
+</div>
+
+<div class="card">
+<h2>الحشوة الأساسية</h2>
+
+<select id="main">
+<option>بانيه - 30ج</option>
+<option>ستريبس - 30ج</option>
+<option>شيش - 40ج</option>
+<option>كفتة - 40ج</option>
+<option>سماش برجر - 40ج</option>
+<option>فرايد تشيكن - 45ج</option>
+<option>هوت دوج - 40ج</option>
+<option>زنجر - 40ج</option>
+<option>فاهيتا - 45ج</option>
+</select>
+</div>
+
+<div class="card">
+<h2>الإضافات</h2>
+
+<label><input type="checkbox" value="كابوتشا 5ج"> كابوتشا 5ج</label><br>
+<label><input type="checkbox" value="بطاطس 10ج"> بطاطس 10ج</label><br>
+<label><input type="checkbox" value="هالبينو 10ج"> هالبينو 10ج</label><br>
+<label><input type="checkbox" value="زيتون 10ج"> زيتون 10ج</label><br>
+<label><input type="checkbox" value="جبنة موتزاريلا 15ج"> جبنة موتزاريلا 15ج</label><br>
+<label><input type="checkbox" value="وش جبنة 20ج"> وش جبنة 20ج</label>
+</div>
+
+<div class="card">
+<h2>الصوصات</h2>
+
+<label><input type="checkbox" value="رانش 10ج"> رانش 10ج</label><br>
+<label><input type="checkbox" value="تكساس 10ج"> تكساس 10ج</label><br>
+<label><input type="checkbox" value="ألف جزيرة 10ج"> ألف جزيرة 10ج</label><br>
+<label><input type="checkbox" value="كاتشب 5ج"> كاتشب 5ج</label><br>
+<label><input type="checkbox" value="مايونيز 5ج"> مايونيز 5ج</label><br>
+<label><input type="checkbox" value="شيدر 10ج"> شيدر 10ج</label>
+</div>
+
+<div class="card">
+<h2>منطقة التوصيل</h2>
+
+<select id="delivery">
+<option>شبين الكوم - 20ج</option>
+<option>كفر شبين - 30ج</option>
+<option>التل - 30ج</option>
+<option>عرب الحصوة - 40ج</option>
+<option>الحراز - 40ج</option>
+</select>
+</div>
+
+<button onclick="sendOrder()">إرسال الطلب واتساب</button>
+
+</div>
+
+<script>
+function sendOrder(){
+
+let extras=[];
+document.querySelectorAll('input[type=checkbox]:checked').forEach(e=>{
+extras.push(e.value);
+});
+
+let msg=
+"طلب جديد من كريب مزاج%0A%0A"+
+"الاسم: "+document.getElementById("name").value+"%0A"+
+"التليفون: "+document.getElementById("phone").value+"%0A"+
+"العنوان: "+document.getElementById("address").value+"%0A%0A"+
+"العيش: "+document.getElementById("bread").value+"%0A"+
+"الحشوة: "+document.getElementById("main").value+"%0A"+
+"الإضافات: "+extras.join(", ")+"%0A"+
+"التوصيل: "+document.getElementById("delivery").value;
+
+window.open("https://wa.me/201034249028?text="+msg);
+}
+</script>
 
 </body>
 </html>
