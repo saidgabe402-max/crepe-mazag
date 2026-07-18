@@ -45,6 +45,7 @@ padding:10px;
 margin:5px 0;
 border-radius:8px;
 border:none;
+box-sizing:border-box;
 }
 
 button{
@@ -61,8 +62,10 @@ cursor:pointer;
 .price{
 color:#ffd54f;
 font-weight:bold;
+font-size:22px;
 }
 </style>
+
 </head>
 
 <body>
@@ -122,6 +125,7 @@ font-weight:bold;
 <label><input type="checkbox" value="زيتون 10ج"> زيتون 10ج</label><br>
 <label><input type="checkbox" value="جبنة موتزاريلا 15ج"> جبنة موتزاريلا 15ج</label><br>
 <label><input type="checkbox" value="وش جبنة 20ج"> وش جبنة 20ج</label>
+
 </div>
 
 <div class="card">
@@ -133,6 +137,7 @@ font-weight:bold;
 <label><input type="checkbox" value="كاتشب 5ج"> كاتشب 5ج</label><br>
 <label><input type="checkbox" value="مايونيز 5ج"> مايونيز 5ج</label><br>
 <label><input type="checkbox" value="شيدر 10ج"> شيدر 10ج</label>
+
 </div>
 
 <div class="card">
@@ -146,28 +151,35 @@ font-weight:bold;
 <option>الحراز - 40ج</option>
 </select>
 </div>
+
 <div class="card">
 <h2>إجمالي السعر</h2>
 <div id="totalPrice" class="price">0 ج</div>
 </div>
+
 <button onclick="sendOrder()">إرسال الطلب واتساب</button>
 
 </div>
 
 <script>
-  function calculateTotal(){
+  <script>
+
+function calculateTotal(){
 
 let total = 0;
 
+// سعر العيش
 if(document.getElementById("bread").value.includes("10ج")){
 total += 10;
 }
 
+// الحشوات الأساسية
 document.querySelectorAll('.mainFill:checked').forEach(e=>{
 let price = parseInt(e.value.match(/\d+/)[0]);
 total += price;
 });
 
+// الإضافات والصوصات
 document.querySelectorAll('input[type=checkbox]:checked').forEach(e=>{
 if(!e.classList.contains('mainFill')){
 let price = parseInt(e.value.match(/\d+/)[0]);
@@ -175,10 +187,14 @@ total += price;
 }
 });
 
+// التوصيل
 let delivery = document.getElementById("delivery").value;
 total += parseInt(delivery.match(/\d+/)[0]);
 
 document.getElementById("totalPrice").innerHTML = total + " ج";
+
+}
+
 function sendOrder(){
 
 let mains = [];
@@ -201,18 +217,21 @@ let msg =
 "العيش: " + document.getElementById("bread").value + "%0A"+
 "الحشوات الأساسية: " + mains.join(" + ") + "%0A"+
 "الإضافات: " + extras.join(", ") + "%0A"+
-"الإجمالي: " + document.getElementById("totalPrice").innerText + "%0A"+}
+"الإجمالي: " + document.getElementById("totalPrice").innerText + "%0A"+
 "التوصيل: " + document.getElementById("delivery").value;
 
+window.open("https://wa.me/201034249028?text=" + encodeURIComponent(decodeURIComponent(msg)), "_blank");
 
-winwindow.open("https://wa.me/201034249028?text=" + msg);
 }
 
+// تحديث السعر تلقائياً
 document.querySelectorAll("input,select").forEach(el=>{
-    el.addEventListener("change", calculateTotal);
+el.addEventListener("change", calculateTotal);
 });
 
+// أول تشغيل
 calculateTotal();
+
 </script>
 
 </body>
