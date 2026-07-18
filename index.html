@@ -146,12 +146,39 @@ font-weight:bold;
 <option>الحراز - 40ج</option>
 </select>
 </div>
-
+<div class="card">
+<h2>إجمالي السعر</h2>
+<div id="totalPrice" class="price">0 ج</div>
+</div>
 <button onclick="sendOrder()">إرسال الطلب واتساب</button>
 
 </div>
 
 <script>
+  function calculateTotal(){
+
+let total = 0;
+
+if(document.getElementById("bread").value.includes("10ج")){
+total += 10;
+}
+
+document.querySelectorAll('.mainFill:checked').forEach(e=>{
+let price = parseInt(e.value.match(/\d+/)[0]);
+total += price;
+});
+
+document.querySelectorAll('input[type=checkbox]:checked').forEach(e=>{
+if(!e.classList.contains('mainFill')){
+let price = parseInt(e.value.match(/\d+/)[0]);
+total += price;
+}
+});
+
+let delivery = document.getElementById("delivery").value;
+total += parseInt(delivery.match(/\d+/)[0]);
+
+document.getElementById("totalPrice").innerHTML = total + " ج";
 function sendOrder(){
 
 let mains = [];
@@ -174,9 +201,16 @@ let msg =
 "العيش: " + document.getElementById("bread").value + "%0A"+
 "الحشوات الأساسية: " + mains.join(" + ") + "%0A"+
 "الإضافات: " + extras.join(", ") + "%0A"+
+"الإجمالي: " + document.getElementById("totalPrice").innerText + "%0A"+
 "التوصيل: " + document.getElementById("delivery").value;
 
+
 window.open("https://wa.me/201034249028?text=" + msg);
+  document.querySelectorAll("input,select").forEach(el=>{
+el.addEventListener("change", calculateTotal);
+});
+
+calculateTotal();
 </script>
 
 </body>
