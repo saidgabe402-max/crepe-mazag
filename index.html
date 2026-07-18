@@ -162,7 +162,7 @@ font-size:22px;
 </div>
 
 <script>
-  <script>
+  
 
 function calculateTotal(){
 
@@ -220,9 +220,7 @@ let msg =
 "الإجمالي: " + document.getElementById("totalPrice").innerText + "%0A"+
 "التوصيل: " + document.getElementById("delivery").value;
 
-window.open("https://wa.me/201034249028?text=" + encodeURIComponent(decodeURIComponent(msg)), "_blank");
-
-}
+window.open("https://wa.me/201034249028?text=" + encodeURIComponent(msg), "_blank");
 
 // تحديث السعر تلقائياً
 document.querySelectorAll("input,select").forEach(el=>{
